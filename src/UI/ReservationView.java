@@ -5,17 +5,62 @@
  */
 package UI;
 
+import Client.AppHandler;
+import Client.Cronometro;
+import SRL.Seat;
+import SRL.Spectacle;
+import java.awt.Color;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MiguelAngel
  */
 public class ReservationView extends javax.swing.JFrame {
 
+    private final Integer AVAILABLE_STATE = 1;
+    private final Integer OCCUPIED_STATE = 2;
+    private final Integer SELECTED_STATE= 3;
+    private final Integer MAX_SELECTED = 5;
+    private final Color AVAILABLE;
+    private final Color OCCUPIED;
+    private final Color SELECTED_PRESOLD;
+    private final Color SELECTED_ELSE;
+    private final Map<Integer, JButton> seats;
+    private final List<Seat> selected;
+    private final AppHandler handler;
+    private final Spectacle spectacle;
+    
+    private Integer remainingTime;
+    private boolean reservating;
+    private Cronometro cronometro;
+    
     /**
      * Creates new form ReservationView
+     * @param handler
+     * @param s
      */
-    public ReservationView() {
+    public ReservationView(AppHandler handler, Spectacle s) {
         initComponents();
+        this.AVAILABLE = new Color(0,153,51);
+        this.OCCUPIED = Color.RED;
+        this.SELECTED_PRESOLD = Color.BLUE;
+        this.SELECTED_ELSE = Color.GRAY;
+        this.seats = new HashMap<>();
+        startMap();
+        this.selected = new ArrayList<>();
+        this.handler = handler;
+        this.spectacle = s;
+        updateSelectedSeats();
+        startReservation();
     }
 
     /**
@@ -26,58 +71,1246 @@ public class ReservationView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+
+        seat1Button = new javax.swing.JButton();
+        seat2Button = new javax.swing.JButton();
+        seat3Button = new javax.swing.JButton();
+        seat4Button = new javax.swing.JButton();
+        seat5Button = new javax.swing.JButton();
+        seat6Button = new javax.swing.JButton();
+        seat7Button = new javax.swing.JButton();
+        seat8Button = new javax.swing.JButton();
+        seat9Button = new javax.swing.JButton();
+        seat10Button = new javax.swing.JButton();
+        seat11Button = new javax.swing.JButton();
+        seat12Button = new javax.swing.JButton();
+        seat13Button = new javax.swing.JButton();
+        seat14Button = new javax.swing.JButton();
+        seat15Button = new javax.swing.JButton();
+        seat16Button = new javax.swing.JButton();
+        seat17Button = new javax.swing.JButton();
+        seat18Button = new javax.swing.JButton();
+        seat19Button = new javax.swing.JButton();
+        seat20Button = new javax.swing.JButton();
+        seat21Button = new javax.swing.JButton();
+        seat22Button = new javax.swing.JButton();
+        seat23Button = new javax.swing.JButton();
+        seat24Button = new javax.swing.JButton();
+        seat25Button = new javax.swing.JButton();
+        seat26Button = new javax.swing.JButton();
+        seat27Button = new javax.swing.JButton();
+        seat28Button = new javax.swing.JButton();
+        seat29Button = new javax.swing.JButton();
+        seat30Button = new javax.swing.JButton();
+        seat31Button = new javax.swing.JButton();
+        seat32Button = new javax.swing.JButton();
+        seat33Button = new javax.swing.JButton();
+        seat34Button = new javax.swing.JButton();
+        seat35Button = new javax.swing.JButton();
+        seat36Button = new javax.swing.JButton();
+        seat37Button = new javax.swing.JButton();
+        seat38Button = new javax.swing.JButton();
+        seat39Button = new javax.swing.JButton();
+        seat40Button = new javax.swing.JButton();
+        seat41Button = new javax.swing.JButton();
+        seat42Button = new javax.swing.JButton();
+        seat43Button = new javax.swing.JButton();
+        seat44Button = new javax.swing.JButton();
+        seat45Button = new javax.swing.JButton();
+        seat46Button = new javax.swing.JButton();
+        seat47Button = new javax.swing.JButton();
+        seat48Button = new javax.swing.JButton();
+        seat49Button = new javax.swing.JButton();
+        seat50Button = new javax.swing.JButton();
+        buttonPreBuy = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
+        timeLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        seat1Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat1Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat1Button, org.jdesktop.beansbinding.ELProperty.create("1"), seat1Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat1Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat1Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat2Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat2Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat2Button, org.jdesktop.beansbinding.ELProperty.create("2"), seat2Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat2Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat3Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat3Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat3Button, org.jdesktop.beansbinding.ELProperty.create("3"), seat3Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat3Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat3Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat4Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat4Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat4Button, org.jdesktop.beansbinding.ELProperty.create("4"), seat4Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat4Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat4Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat5Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat5Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat5Button, org.jdesktop.beansbinding.ELProperty.create("5"), seat5Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat5Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat5Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat6Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat6Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat6Button, org.jdesktop.beansbinding.ELProperty.create("6"), seat6Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat6Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat6Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat7Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat7Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat7Button, org.jdesktop.beansbinding.ELProperty.create("7"), seat7Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat7Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat7Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat8Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat8Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat8Button, org.jdesktop.beansbinding.ELProperty.create("8"), seat8Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat8Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat8Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat9Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat9Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat9Button, org.jdesktop.beansbinding.ELProperty.create("9"), seat9Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat9Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat9Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat10Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat10Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat10Button, org.jdesktop.beansbinding.ELProperty.create("10"), seat10Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat10Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat10Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat11Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat11Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat11Button, org.jdesktop.beansbinding.ELProperty.create("11"), seat11Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat11Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat11Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat12Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat12Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat12Button, org.jdesktop.beansbinding.ELProperty.create("12"), seat12Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat12Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat12Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat13Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat13Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat13Button, org.jdesktop.beansbinding.ELProperty.create("13"), seat13Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat13Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat13Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat14Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat14Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat14Button, org.jdesktop.beansbinding.ELProperty.create("14"), seat14Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat14Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat14Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat15Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat15Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat15Button, org.jdesktop.beansbinding.ELProperty.create("15"), seat15Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat15Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat15Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat16Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat16Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat16Button, org.jdesktop.beansbinding.ELProperty.create("16"), seat16Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat16Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat16Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat17Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat17Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat17Button, org.jdesktop.beansbinding.ELProperty.create("17"), seat17Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat17Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat17Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat18Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat18Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat18Button, org.jdesktop.beansbinding.ELProperty.create("18"), seat18Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat18Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat18Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat19Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat19Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat19Button, org.jdesktop.beansbinding.ELProperty.create("19"), seat19Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat19Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat19Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat20Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat20Button.setPreferredSize(new java.awt.Dimension(50, 30));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, seat20Button, org.jdesktop.beansbinding.ELProperty.create("20"), seat20Button, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        seat20Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat20Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat21Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat21Button.setActionCommand("21");
+        seat21Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat21Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat21Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat22Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat22Button.setActionCommand("22");
+        seat22Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat22Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat22Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat23Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat23Button.setActionCommand("23");
+        seat23Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat23Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat23Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat24Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat24Button.setActionCommand("24");
+        seat24Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat24Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat24Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat25Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat25Button.setActionCommand("25");
+        seat25Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat25Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat25Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat26Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat26Button.setActionCommand("26");
+        seat26Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat26Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat26Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat27Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat27Button.setActionCommand("27");
+        seat27Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat27Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat27Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat28Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat28Button.setActionCommand("28");
+        seat28Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat28Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat28Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat29Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat29Button.setActionCommand("29");
+        seat29Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat29Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat29Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat30Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat30Button.setActionCommand("30");
+        seat30Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat30Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat30Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat31Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat31Button.setActionCommand("31");
+        seat31Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat31Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat31Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat32Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat32Button.setActionCommand("32");
+        seat32Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat32Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat32Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat33Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat33Button.setActionCommand("33");
+        seat33Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat33Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat33Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat34Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat34Button.setActionCommand("34");
+        seat34Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat34Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat34Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat35Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat35Button.setActionCommand("35");
+        seat35Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat35Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat35Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat36Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat36Button.setActionCommand("36");
+        seat36Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat36Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat36Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat37Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat37Button.setActionCommand("37");
+        seat37Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat37Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat37Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat38Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat38Button.setActionCommand("38");
+        seat38Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat38Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat38Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat39Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat39Button.setActionCommand("39");
+        seat39Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat39Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat39Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat40Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat40Button.setActionCommand("40");
+        seat40Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat40Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat40Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat41Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat41Button.setActionCommand("41");
+        seat41Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat41Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat41Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat42Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat42Button.setActionCommand("42");
+        seat42Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat42Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat42Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat43Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat43Button.setActionCommand("43");
+        seat43Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat43Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat43Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat44Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat44Button.setActionCommand("44");
+        seat44Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat44Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat44Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat45Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat45Button.setActionCommand("45");
+        seat45Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat45Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat45Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat46Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat46Button.setActionCommand("46");
+        seat46Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat46Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat46Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat47Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat47Button.setActionCommand("47");
+        seat47Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat47Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat47Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat48Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat48Button.setActionCommand("48");
+        seat48Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat48Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat48Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat49Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat49Button.setActionCommand("49");
+        seat49Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat49Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat49Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        seat50Button.setBackground(new java.awt.Color(0, 153, 51));
+        seat50Button.setActionCommand("50");
+        seat50Button.setPreferredSize(new java.awt.Dimension(50, 30));
+        seat50Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seat4Button3MousePressed(evt);
+            }
+        });
+        seat50Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mouseClicked(evt);
+            }
+        });
+
+        buttonPreBuy.setText("Apartar");
+
+        buttonCancel.setText("Cancelar");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
+            }
+        });
+
+        timeLabel.setText(" ");
+
+        jLabel1.setText("Tiempo restante:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonPreBuy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonCancel))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(seat1Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat2Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat3Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat4Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat5Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat6Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat7Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat8Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat9Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat10Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(seat11Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat12Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat13Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat14Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat15Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat16Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat17Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat18Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat19Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat20Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(seat21Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat22Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat23Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat24Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat25Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat26Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat27Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat28Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat29Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat30Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(seat31Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat32Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat33Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat34Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat35Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat36Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat37Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat38Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat39Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat40Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(seat41Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat42Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat43Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat44Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat45Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat46Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat47Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat48Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat49Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(seat50Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {seat10Button, seat11Button, seat12Button, seat13Button, seat14Button, seat15Button, seat16Button, seat17Button, seat18Button, seat19Button, seat1Button, seat20Button, seat21Button, seat22Button, seat23Button, seat24Button, seat25Button, seat26Button, seat27Button, seat28Button, seat29Button, seat2Button, seat30Button, seat31Button, seat32Button, seat33Button, seat34Button, seat35Button, seat36Button, seat37Button, seat38Button, seat39Button, seat3Button, seat40Button, seat41Button, seat42Button, seat43Button, seat44Button, seat45Button, seat46Button, seat47Button, seat48Button, seat49Button, seat4Button, seat50Button, seat5Button, seat6Button, seat7Button, seat8Button, seat9Button});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(timeLabel)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(seat10Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat9Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat8Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat7Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat6Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat5Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat4Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat3Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat2Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat1Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(seat20Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat19Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat18Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat17Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat16Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat15Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat14Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat13Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat12Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat11Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(seat30Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat29Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat28Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat27Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat26Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat25Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat24Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat23Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat22Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat21Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(seat40Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat39Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat38Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat37Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat36Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat35Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat34Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat33Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat32Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat31Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(seat50Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat49Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat48Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat47Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat46Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat45Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat44Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat43Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat42Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seat41Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonPreBuy)
+                    .addComponent(buttonCancel))
+                .addGap(32, 32, 32))
         );
 
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {seat10Button, seat11Button, seat12Button, seat13Button, seat14Button, seat15Button, seat16Button, seat17Button, seat18Button, seat19Button, seat1Button, seat20Button, seat21Button, seat22Button, seat23Button, seat24Button, seat25Button, seat26Button, seat27Button, seat28Button, seat29Button, seat2Button, seat30Button, seat31Button, seat32Button, seat33Button, seat34Button, seat35Button, seat36Button, seat37Button, seat38Button, seat39Button, seat3Button, seat40Button, seat41Button, seat42Button, seat43Button, seat44Button, seat45Button, seat46Button, seat47Button, seat48Button, seat49Button, seat4Button, seat50Button, seat5Button, seat6Button, seat7Button, seat8Button, seat9Button});
+
+        bindingGroup.bind();
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReservationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReservationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReservationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReservationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void mouseClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ReservationView().setVisible(true);
+        JButton pressedBtn = (JButton) evt.getSource();
+        Integer seatId = Integer.parseInt(pressedBtn.getActionCommand());
+
+        if ((pressedBtn.getBackground().equals(AVAILABLE))
+                && (selected.size() < MAX_SELECTED)
+                &&(spectacle.getSeat(seatId).getState().equals(AVAILABLE_STATE))) {
+            try {
+                System.out.println(spectacle.getSeat(seatId).getState());
+                spectacle.getSeat(seatId).setOccupied();
+                selected.add(spectacle.getSeat(seatId));
+                seats.get(seatId).setBackground(SELECTED_PRESOLD);
+                handler.srl.setSelectedSeats(selected);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
-    }
+        } else {
+            if (pressedBtn.getBackground().equals(SELECTED_PRESOLD)) {
+                seats.get(seatId).setBackground(AVAILABLE);
+                spectacle.getSeat(seatId).setAvailable();
+                selected.remove(spectacle.getSeat(seatId));
+            }
+        }
+
+    }//GEN-LAST:event_mouseClicked
+
+    private void seat4Button3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seat4Button3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_seat4Button3MousePressed
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        cancelReservation();
+    }//GEN-LAST:event_buttonCancelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCancel;
+    private javax.swing.JButton buttonPreBuy;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton seat10Button;
+    private javax.swing.JButton seat11Button;
+    private javax.swing.JButton seat12Button;
+    private javax.swing.JButton seat13Button;
+    private javax.swing.JButton seat14Button;
+    private javax.swing.JButton seat15Button;
+    private javax.swing.JButton seat16Button;
+    private javax.swing.JButton seat17Button;
+    private javax.swing.JButton seat18Button;
+    private javax.swing.JButton seat19Button;
+    private javax.swing.JButton seat1Button;
+    private javax.swing.JButton seat20Button;
+    private javax.swing.JButton seat21Button;
+    private javax.swing.JButton seat22Button;
+    private javax.swing.JButton seat23Button;
+    private javax.swing.JButton seat24Button;
+    private javax.swing.JButton seat25Button;
+    private javax.swing.JButton seat26Button;
+    private javax.swing.JButton seat27Button;
+    private javax.swing.JButton seat28Button;
+    private javax.swing.JButton seat29Button;
+    private javax.swing.JButton seat2Button;
+    private javax.swing.JButton seat30Button;
+    private javax.swing.JButton seat31Button;
+    private javax.swing.JButton seat32Button;
+    private javax.swing.JButton seat33Button;
+    private javax.swing.JButton seat34Button;
+    private javax.swing.JButton seat35Button;
+    private javax.swing.JButton seat36Button;
+    private javax.swing.JButton seat37Button;
+    private javax.swing.JButton seat38Button;
+    private javax.swing.JButton seat39Button;
+    private javax.swing.JButton seat3Button;
+    private javax.swing.JButton seat40Button;
+    private javax.swing.JButton seat41Button;
+    private javax.swing.JButton seat42Button;
+    private javax.swing.JButton seat43Button;
+    private javax.swing.JButton seat44Button;
+    private javax.swing.JButton seat45Button;
+    private javax.swing.JButton seat46Button;
+    private javax.swing.JButton seat47Button;
+    private javax.swing.JButton seat48Button;
+    private javax.swing.JButton seat49Button;
+    private javax.swing.JButton seat4Button;
+    private javax.swing.JButton seat50Button;
+    private javax.swing.JButton seat5Button;
+    private javax.swing.JButton seat6Button;
+    private javax.swing.JButton seat7Button;
+    private javax.swing.JButton seat8Button;
+    private javax.swing.JButton seat9Button;
+    private javax.swing.JLabel timeLabel;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+    private void startMap(){
+        seats.put(1, seat1Button);
+        seats.put(2, seat2Button);
+        seats.put(3, seat3Button);
+        seats.put(4, seat4Button);
+        seats.put(5, seat5Button);
+        seats.put(6, seat6Button);
+        seats.put(7, seat7Button);
+        seats.put(8, seat8Button);
+        seats.put(9, seat9Button);
+        seats.put(10, seat10Button);
+        seats.put(11, seat11Button);
+        seats.put(12, seat12Button);
+        seats.put(13, seat13Button);
+        seats.put(14, seat14Button);
+        seats.put(15, seat15Button);
+        seats.put(16, seat16Button);
+        seats.put(17, seat17Button);
+        seats.put(18, seat18Button);
+        seats.put(19, seat19Button);
+        seats.put(20, seat20Button);
+        seats.put(21, seat21Button);
+        seats.put(22, seat22Button);
+        seats.put(23, seat23Button);
+        seats.put(24, seat24Button);
+        seats.put(25, seat25Button);
+        seats.put(26, seat26Button);
+        seats.put(27, seat27Button);
+        seats.put(28, seat28Button);
+        seats.put(29, seat29Button);
+        seats.put(30, seat30Button);
+        seats.put(31, seat31Button);
+        seats.put(32, seat32Button);
+        seats.put(33, seat33Button);
+        seats.put(34, seat34Button);
+        seats.put(35, seat35Button);
+        seats.put(36, seat36Button);
+        seats.put(37, seat37Button);
+        seats.put(38, seat38Button);
+        seats.put(39, seat39Button);
+        seats.put(40, seat40Button);
+        seats.put(41, seat41Button);
+        seats.put(42, seat42Button);
+        seats.put(43, seat43Button);
+        seats.put(44, seat44Button);
+        seats.put(45, seat45Button);
+        seats.put(46, seat46Button);
+        seats.put(47, seat47Button);
+        seats.put(48, seat48Button);
+        seats.put(49, seat49Button);
+        seats.put(50, seat50Button);
+        
+    }
+    
+    public void updateSelectedSeats() {
+        
+        try {
+            List<Seat> seats = handler.srl.getSelectedSeats(spectacle);
+            for (Seat seat : seats) {
+                if(seat.getState().equals(SELECTED_STATE)){
+                    this.seats.get(seat.getId()).setBackground(SELECTED_ELSE);
+                }
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void showOccupiedSeats() {
+        try {
+            List<Seat> seats = handler.srl.getSoldSeats(spectacle);
+            for (Seat seat : seats) {
+                if(seat.getState().equals(OCCUPIED_STATE)){
+                    this.seats.get(seat.getId()).setBackground(OCCUPIED);
+                }
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void startReservation() {
+        timeLabel.setText("01:00");
+        remainingTime = 60;
+        reservating = true;
+        cronometro = new Cronometro(this);
+        cronometro.start();
+    }
+    
+    public void reduceTimeByASecond() {
+        timeLabel.setText("00:" + remainingTime);
+        remainingTime--;
+    }
+    
+    public void cancelReservation() {
+        if (reservating) {
+            try {
+                JOptionPane.showMessageDialog(this, "Se ha cancelado la reservación");
+                reservating = false;
+                handler.srl.removeSession();
+                MainView view = new MainView();
+                view.setVisible(true);
+                this.dispose();
+            } catch (RemoteException ex) {
+                Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            
+        }
+    }
 }

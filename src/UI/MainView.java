@@ -5,19 +5,33 @@
  */
 package UI;
 
+import Client.AppHandler;
+import SRL.Spectacle;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author MiguelAngel
  */
-public class MainView extends javax.swing.JFrame {
-
+public class MainView extends JFrame {
+    
+    private AppHandler handler;
+    private List<Spectacle> spectacles;
+    private Spectacle selected;
+    
     /**
      * Creates new form MainView
      */
     public MainView() {
         initComponents();
+        handler = new AppHandler();
+        spectacles = handler.getSpectacleList();
+        loadSpectacleList();
     }
 
     /**
@@ -41,7 +55,11 @@ public class MainView extends javax.swing.JFrame {
 
         jLabel1.setText("Espectáculo:");
 
-        spectacleBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", " ", "Item 3", "Item 4" }));
+        spectacleBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                spectacleBoxItemStateChanged(evt);
+            }
+        });
 
         reserveButton.setText("Reservar");
         reserveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -53,8 +71,6 @@ public class MainView extends javax.swing.JFrame {
         cancelButton.setText("Cancelar");
 
         jLabel2.setText("Horario:");
-
-        timeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,9 +129,31 @@ public class MainView extends javax.swing.JFrame {
                     "Horario no elegido", 
                     JOptionPane.INFORMATION_MESSAGE
                 );
+            }else{
+                try {
+                    handler.srl.addSession(selected);
+                    ReservationView view = new ReservationView(handler, selected);
+                    view.setVisible(true);
+                    this.dispose();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_reserveButtonActionPerformed
+
+    private void spectacleBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_spectacleBoxItemStateChanged
+
+        timeBox.removeAllItems();
+
+        for (Spectacle current : spectacles) {
+            if (spectacleBox.getSelectedItem().toString().equals(current.getName())) {
+                timeBox.addItem(current.getDate());
+                selected = current;
+            }
+        }
+
+    }//GEN-LAST:event_spectacleBoxItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -160,4 +198,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JComboBox spectacleBox;
     private javax.swing.JComboBox timeBox;
     // End of variables declaration//GEN-END:variables
+
+    private void loadSpectacleList() {
+        
+        for (Spectacle current : spectacles) {
+            spectacleBox.addItem(current.getName());
+        }
+    }
 }
