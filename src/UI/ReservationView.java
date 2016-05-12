@@ -10,13 +10,10 @@ import Client.Cronometro;
 import SRL.Seat;
 import SRL.Spectacle;
 import java.awt.Color;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -42,6 +39,7 @@ public class ReservationView extends javax.swing.JFrame {
     private Integer remainingTime;
     private boolean reservating;
     private Cronometro cronometro;
+    private PreSellView view;
     
     /**
      * Creates new form ReservationView
@@ -891,6 +889,11 @@ public class ReservationView extends javax.swing.JFrame {
         });
 
         buttonPreBuy.setText("Apartar");
+        buttonPreBuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPreBuyActionPerformed(evt);
+            }
+        });
 
         buttonCancel.setText("Cancelar");
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -1113,23 +1116,23 @@ public class ReservationView extends javax.swing.JFrame {
         JButton pressedBtn = (JButton) evt.getSource();
         Integer seatId = Integer.parseInt(pressedBtn.getActionCommand());
 
-        if ((pressedBtn.getBackground().equals(AVAILABLE))
+        if (!(selected.contains(spectacle.getSeat(seatId)))
                 && (selected.size() < MAX_SELECTED)
-                &&(spectacle.getSeat(seatId).getState().equals(AVAILABLE_STATE))) {
-            try {
-                System.out.println(spectacle.getSeat(seatId).getState());
-                spectacle.getSeat(seatId).setOccupied();
-                selected.add(spectacle.getSeat(seatId));
-                seats.get(seatId).setBackground(SELECTED_PRESOLD);
-                handler.srl.setSelectedSeats(selected);
-            } catch (RemoteException ex) {
-                Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                && (spectacle.getSeat(seatId).getState().equals(AVAILABLE_STATE))) {
+
+            spectacle.getSeat(seatId).setSelected();
+            selected.add(spectacle.getSeat(seatId));
+            seats.get(seatId).setBackground(SELECTED_PRESOLD);
+            handler.setSelectedSeats(selected);
+            
         } else {
-            if (pressedBtn.getBackground().equals(SELECTED_PRESOLD)) {
+            if (selected.contains(spectacle.getSeat(seatId))) {
+                
                 seats.get(seatId).setBackground(AVAILABLE);
                 spectacle.getSeat(seatId).setAvailable();
                 selected.remove(spectacle.getSeat(seatId));
+                handler.setSelectedSeats(selected);
+                
             }
         }
 
@@ -1142,6 +1145,18 @@ public class ReservationView extends javax.swing.JFrame {
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         cancelReservation();
     }//GEN-LAST:event_buttonCancelActionPerformed
+
+    private void buttonPreBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPreBuyActionPerformed
+        // TODO add your handling code here:
+        if(!selected.isEmpty()) {
+            view = new PreSellView(this);
+            view.setVisible(true);
+            view.setFocusable(true);
+            this.setEnabled(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe elegir asientos antes de comprarlos.");
+        }
+    }//GEN-LAST:event_buttonPreBuyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1202,7 +1217,7 @@ public class ReservationView extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void startMap(){
+    private void startMap() {
         seats.put(1, seat1Button);
         seats.put(2, seat2Button);
         seats.put(3, seat3Button);
@@ -1253,37 +1268,9 @@ public class ReservationView extends javax.swing.JFrame {
         seats.put(48, seat48Button);
         seats.put(49, seat49Button);
         seats.put(50, seat50Button);
-        
+
     }
-    
-    public void updateSelectedSeats() {
-        
-        try {
-            List<Seat> seats = handler.srl.getSelectedSeats(spectacle);
-            for (Seat seat : seats) {
-                if(seat.getState().equals(SELECTED_STATE)){
-                    this.seats.get(seat.getId()).setBackground(SELECTED_ELSE);
-                }
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    public void showOccupiedSeats() {
-        try {
-            List<Seat> seats = handler.srl.getSoldSeats(spectacle);
-            for (Seat seat : seats) {
-                if(seat.getState().equals(OCCUPIED_STATE)){
-                    this.seats.get(seat.getId()).setBackground(OCCUPIED);
-                }
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+
     private void startReservation() {
         timeLabel.setText("01:00");
         remainingTime = 60;
@@ -1292,25 +1279,63 @@ public class ReservationView extends javax.swing.JFrame {
         cronometro.start();
     }
     
+    public void updateSelectedSeats() {
+
+        List<Seat> seats = handler.getSelectedSeats(spectacle);
+        for (Seat seat : seats) {
+            if (seat.getState().equals(SELECTED_STATE)) {
+                this.seats.get(seat.getId()).setBackground(SELECTED_ELSE);
+            }
+        }
+
+        List<Seat> mySeats = handler.getMySelectedSeats(spectacle);
+        for (Seat seat : mySeats) {
+            this.seats.get(seat.getId()).setBackground(SELECTED_PRESOLD);
+        }
+
+    }
+
+    public void showOccupiedSeats() {
+
+        List<Seat> seats = handler.getSoldSeats(spectacle);
+        for (Seat seat : seats) {
+            if (seat.getState().equals(OCCUPIED_STATE)) {
+                this.seats.get(seat.getId()).setBackground(OCCUPIED);
+            }
+        }
+
+    }
+    
     public void reduceTimeByASecond() {
         timeLabel.setText("00:" + remainingTime);
         remainingTime--;
     }
-    
+
     public void cancelReservation() {
         if (reservating) {
-            try {
-                JOptionPane.showMessageDialog(this, "Se ha cancelado la reservación");
-                reservating = false;
-                handler.srl.removeSession();
-                MainView view = new MainView();
-                view.setVisible(true);
-                this.dispose();
-            } catch (RemoteException ex) {
-                Logger.getLogger(ReservationView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Se ha cancelado la reservación");
+            reservating = false;
+            handler.removeSession();
+            MainView view = new MainView();
+            view.setVisible(true);
+            this.dispose();
+            if(this.view != null)
+                this.view.dispose();
+        }
+    }
+
+    public void clearOthersSeats() {
+        for (Map.Entry<Integer, JButton> entrySet : seats.entrySet()) {
+            Integer key = entrySet.getKey();
+            JButton value = entrySet.getValue();
+            if(value.getBackground().equals(SELECTED_ELSE)) {
+                value.setBackground(AVAILABLE);
             }
-        }else{
             
         }
+    }
+    
+    public List<Seat> getSelected(){
+        return selected;
     }
 }

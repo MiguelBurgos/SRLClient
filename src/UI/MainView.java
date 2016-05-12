@@ -30,7 +30,7 @@ public class MainView extends JFrame {
     public MainView() {
         initComponents();
         handler = new AppHandler();
-        spectacles = handler.getSpectacleList();
+        spectacles = handler.readSpectacles();
         loadSpectacleList();
     }
 
@@ -116,28 +116,24 @@ public class MainView extends JFrame {
 
     private void reserveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveButtonActionPerformed
         // TODO add your handling code here:
-        if(spectacleBox.getSelectedItem().toString().equals(" ")){
-            JOptionPane.showMessageDialog(null, 
-                "¡Debe elegir un espectáculo!", 
-                "Espectáculo no elegido", 
-                JOptionPane.INFORMATION_MESSAGE
-            );
-        }else{
-            if(timeBox.getSelectedItem().toString().equals(" ")){
-                JOptionPane.showMessageDialog(null, 
-                    "¡Debe elegir un horario!", 
-                    "Horario no elegido", 
+        if (spectacleBox.getSelectedItem().toString().equals(" ")) {
+            JOptionPane.showMessageDialog(null,
+                    "¡Debe elegir un espectáculo!",
+                    "Espectáculo no elegido",
                     JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            if (timeBox.getSelectedItem().toString().equals(" ")) {
+                JOptionPane.showMessageDialog(null,
+                        "¡Debe elegir un horario!",
+                        "Horario no elegido",
+                        JOptionPane.INFORMATION_MESSAGE
                 );
-            }else{
-                try {
-                    handler.srl.addSession(selected);
-                    ReservationView view = new ReservationView(handler, selected);
-                    view.setVisible(true);
-                    this.dispose();
-                } catch (RemoteException ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } else {
+                handler.addSession(selected);
+                ReservationView view = new ReservationView(handler, selected);
+                view.setVisible(true);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_reserveButtonActionPerformed

@@ -11,7 +11,7 @@ import UI.ReservationView;
 
 /**
  *
- * @author RIP WiLHeM Mx
+ * @author MiguelBurgos
  */
 public class Cronometro extends Thread{
     
@@ -28,11 +28,12 @@ public class Cronometro extends Thread{
          for (int i = 0; i < 60; i++) {
              if (continuar) {
                  try {
-            sleep(990);    
+            sleep(985);    
             ventanaPrincipal.reduceTimeByASecond();
-            if(i%5 == 0){
+            if(i%2 == 0){
+                ventanaPrincipal.clearOthersSeats();
                 ventanaPrincipal.updateSelectedSeats();
-            }
+           }
         } catch (Exception e) {
         }
              }
