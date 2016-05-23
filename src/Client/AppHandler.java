@@ -33,7 +33,7 @@ public class AppHandler {
 
     public AppHandler() {
         try {
-            this.registry = LocateRegistry.getRegistry("192.168.228.253", 1098);
+            this.registry = LocateRegistry.getRegistry("192.168.228.73", 1098);
             this.srl = (IRemoteSRL) registry.lookup("SRLServer");
             
             spectacles = new HashMap<>();
